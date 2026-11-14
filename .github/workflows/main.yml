@@ -9,9 +9,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - run: |
+            - run: |
           wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O apktool.jar
-          java -jar apktool.jar d OneUisland-v1_4_5.apk -o out -f
+          APK=$(find . -iname "*.apk" | head -1)
+          echo "Usando: $APK"
+          java -jar apktool.jar d "$APK" -o out -f
           zip -qr out.zip out
       - uses: actions/upload-artifact@v4
         with:
